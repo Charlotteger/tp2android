@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final List<User> userlist = new ArrayList();
-        userlist.add(new User("Stark","Catelyn",42));
-        userlist.add(new User("Lanister","Tyrion",49));
-        userlist.add(new User("Snow","John",32));
-        userlist.add(new User("Lanister","Cercei",34));
+        userlist.add(new User(false,"Stark","Catelyn",42));
+        userlist.add(new User(false,"Lanister","Tyrion",49));
+        userlist.add(new User(false,"Snow","John",32));
+        userlist.add(new User(false,"Lanister","Cercei",34));
         for(int i = 0; i<1000 ; i++){
-            userlist.add(new User("nom " + i,"prenom " + i, i ));
+            userlist.add(new User(false,"nom " + i,"prenom " + i, i ));
         }
 
         RecyclerView recycler = findViewById(R.id.recyclerview);

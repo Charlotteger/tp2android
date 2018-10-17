@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data class="TotBinding"><variable
+        name="user"
+        type="fr.maformation.charlotte.layouts.User"/>
+    </data>
+    <LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@{user.isSelected ? 0xD3D3D3 : user.age > 40 ? 0xFF33FF00 : 0xFFFFFF00}"
+        >
 
     <TextView
         android:id="@+id/nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:text="@{user.nom}"/>
 
     <TextView
         android:id="@+id/prenom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:text="@{user.prenom}"/>
 
     <TextView
         android:id="@+id/age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
-</LinearLayout>
+        android:layout_weight="1"
+        android:text="@{String.valueOf(user.age)}"/>
+    </LinearLayout>
+</layout>

@@ -1,5 +1,6 @@
 package fr.maformation.charlotte.layouts;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
+
+import fr.maformation.charlotte.layouts.databinding.TotBinding;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>   {
 
@@ -26,11 +29,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>   {
     //Un ViewHolder représente un conteneur pour la vue de chaque item de la liste
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //each data item is just a string in this case
-        private LinearLayout v;
-        public MyViewHolder(LinearLayout v) {
-            super(v);
-            this.v = v;
-            this.v.setOnClickListener(this);
+        TotBinding binding;
+        public MyViewHolder(View view) {
+            super(view);
+            this.binding = DataBindingUtil.bind(view);
+            view.setOnClickListener(this);
         }
 
         @Override
@@ -39,6 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>   {
             //en appelant getAdapterPosition(), on sait aussi de quel item il s'agit
             //mais que faire mtn pr prévenir l'activité ?
             listener.onClick(view, getAdapterPosition());
+            users.get(getAdapterPosition()).setSelected(true);
         }
     }
 
@@ -46,15 +50,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>   {
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder (ViewGroup parent, int viewType){
         //instancie la vue d'un item en allant chercher le layout particulier
-        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.user, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
+        TotBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.user, parent, false);
+        MyViewHolder vh = new MyViewHolder(binding.getRoot());
         return vh;
     }
 
     //fabrique le contenu de la vue associée à l'item de numero 'position'
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        TextView nom = holder.v.findViewById(R.id.nom);
+        User user = users.get(position);
+        holder.binding.setUser(user);
+        /* TextView nom = holder.v.findViewById(R.id.nom);
         TextView prenom = holder.v.findViewById(R.id.prenom);
         TextView age = holder.v.findViewById(R.id.age);
 
@@ -67,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>   {
         }else{
             holder.v.setBackgroundColor(0xFFFFFF00);
         }
+        */
     }
 
     //Doit retourner la taille de la liste d'items
