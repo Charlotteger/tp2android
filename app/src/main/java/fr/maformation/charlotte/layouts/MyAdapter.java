@@ -14,6 +14,8 @@ import fr.maformation.charlotte.layouts.databinding.TotBinding;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>   {
 
+    int tempPosition = -1;
+
     interface ItemClickListener{
         void onClick(View view, int position);
     }
@@ -41,8 +43,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>   {
             //ici on sait que l'utilisateur a cliqué sur l'item
             //en appelant getAdapterPosition(), on sait aussi de quel item il s'agit
             //mais que faire mtn pr prévenir l'activité ?
+            if (tempPosition != -1)
+                users.get(tempPosition).setSelected(false);
+            
             listener.onClick(view, getAdapterPosition());
             users.get(getAdapterPosition()).setSelected(true);
+            tempPosition = getAdapterPosition();
         }
     }
 

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position){
                 //c'est ici que le click sera transmis à l'activité
-                if (tempv != null) {
+                /*if (tempv != null) {
                     if (userlist.get(tempp).age > 40) {
                         tempv.setBackgroundColor(0xFF33FF00);
                     } else {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 tempv = view;
                 tempp = position;
-                view.setBackgroundColor(GRAY);
+                view.setBackgroundColor(GRAY);*/
                 Intent intent = new Intent(getBaseContext(), FullUserActivity.class);
                 intent.putExtra("user",userlist.get(position));
                 startActivity(intent);
